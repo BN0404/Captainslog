@@ -1,4 +1,8 @@
+require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose');
+const connectToDB = require('./config/db');
+const Logs = require('./models/Logs');
 
 const app = express()
 const PORT = 3000;
@@ -17,16 +21,17 @@ app.get('/new', (req, res) => {
 res.render('New')
 })
 
-app.get('/ship', (req, res) => {
+app.post    ('/logs', (req, res) => {
 // res.send('received')
-    // console.log(req.body)
-    if (req.body.shipIsBroken === 'on') {
-        req.body.shipIsBroken = true;
-    } else {
-        req.body.shipIsBroken = false;
-    }
+    console.log(req.body)
+    // if (req.body.shipIsBroken === 'on') {
+    //     req.body.shipIsBroken = true;
+    // } else {
+    //     req.body.shipIsBroken = false;
+    // }
 })
 
 app.listen(3000, () => {
     console.log(`Server is running: ${PORT}`);
+    connectToDB();
 })
